@@ -1,0 +1,38 @@
+<div class="p-5">
+  <a href="/items/new" type="button" class="btn btn-primary mb-5" style="float: right;">Add data</a>
+
+  <table class="table">
+    <thead class="table-primary">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.price %></td>
+        <td>
+          <a class="btn btn-success" href="/items/<%= item.id %>" role="button">Show</a>
+          <a class="btn btn-warning" href="/items/<%= item.id %>/edit" role="button">Edit</a>
+          <button type="button" class="btn btn-danger" onclick="deleteData(<%= item.id %>)">Delete</button>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+    const deleteData = async id => {
+        const result = await axios.delete("/items/" + id, config);
+
+        console.log(result);
+
+        if (result.status === 204) {
+            window.location.reload();
+        }
+    }
+</script>
