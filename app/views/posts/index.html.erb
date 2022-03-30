@@ -1,0 +1,51 @@
+<div class="p-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Posts</h1>
+    <div>
+      <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Writers
+      </button>
+      <a class="btn btn-success" href="<%= new_post_path %>" role="button">New post</a>
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead class="table-primary">
+    <tr>
+      <th scope="col">Writer</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @posts.each do |post| %>
+      <tr onclick="window.location='<%= post_path post.id %>'" style="cursor: pointer;">
+        <td><%= post.name %></td>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Semua Penulis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% @posts.each do |post| %>
+          <p>
+            <%= post.name %>
+          </p>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
